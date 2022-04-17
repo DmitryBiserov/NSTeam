@@ -26,7 +26,15 @@ namespace NSTeam
         {
             Document doc = commandData.Application.ActiveUIDocument.Document;
 
-            string inputParam = "NS_Отделка тип пола";
+            FormFloorSettings formFloor = new FormFloorSettings();
+            formFloor.ShowDialog();
+
+            if (formFloor.DialogResult != System.Windows.Forms.DialogResult.OK)
+            {
+                return Result.Cancelled;
+            }
+
+            string inputParam = formFloor.floorInputParam;
             string outputParam = "NS_Номера помещений_по типу пола";
 
             //Получаем список помещений

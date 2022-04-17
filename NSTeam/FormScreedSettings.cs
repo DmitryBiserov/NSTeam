@@ -12,9 +12,23 @@ namespace NSTeam
 {
     public partial class FormScreedSettings : Form
     {
+        public string screedInputParam;
         public FormScreedSettings()
         {
             InitializeComponent();
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            screedInputParam = textBoxScreedInput.Text;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

@@ -26,9 +26,18 @@ namespace NSTeam
         {
             Document doc = commandData.Application.ActiveUIDocument.Document;
 
-            string inputParam = "NS_Пол_Стяжка толщина";
-            string outputParam = "NS_Номера помещений по типу стяжки";
+            FormScreedSettings formScreed = new FormScreedSettings();
+            formScreed.ShowDialog();
 
+            if (formScreed.DialogResult != System.Windows.Forms.DialogResult.OK)
+            {
+                return Result.Cancelled;
+            }
+
+            string inputParam = formScreed.screedInputParam;//Принимаем параметр из окошка
+            //на будущее - создать повторный вывод окошка, при пустом значении (или проверку по исеющимся параметрам в проекте)
+            string outputParam = "NS_Номера помещений по типу стяжки";
+            
             //Получаем список помещений
             List<Room> roomsList = new FilteredElementCollector(doc)
             .OfCategory(BuiltInCategory.OST_Rooms)

@@ -10,35 +10,25 @@ using System.Windows.Forms;
 
 namespace NSTeam
 {
-    public partial class FormSettings : Form
+    public partial class FormFloorSettings : Form
     {
-        public string floorInParam;
-        public FormSettings()
+        public string floorInputParam;
+        public FormFloorSettings()
         {
             InitializeComponent();
         }
 
-        private void FormSettings_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnOk_Click(object sender, EventArgs e)
         {
-            floorInParam = floorInputParam.Text;
+            floorInputParam = textBoxFloorInput.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel; 
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
