@@ -90,7 +90,7 @@ namespace NSTeam
 
             }
             //информационное окошко в конце программы
-            TaskDialog.Show("Info", "Обработано " + resultCount + " экземпляра(ов) семейств " + "\n" + doorTypesNames);
+            TaskDialog.Show("Info", "Обработано " + resultCount + " экземпляра(ов) семейств");
             return Result.Succeeded;//для реализации Result Execute
         }
 
