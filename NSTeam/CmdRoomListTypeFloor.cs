@@ -61,7 +61,7 @@ namespace NSTeam
 
 
                 //читаем параметр Отделки пола
-                string floorAtRoom = floorParam.AsString();
+                string floorAtRoom = floorParam.AsValueString();
                 if (floorAtRoom == null) throw new Exception("Не задан параметр отделки: " + inputParam + " В помещении: " + curRoomNumber);
 
                 //floor.Add(floorParam.AsValueString()); - так бы мы добавляли в список полов значение параметра Отделки пола
