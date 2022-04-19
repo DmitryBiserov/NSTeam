@@ -61,8 +61,18 @@ namespace NSTeam
 
 
                 //читаем параметр Отделки пола
-                string floorAtRoom = floorParam.AsValueString();
-                if (floorAtRoom == null) throw new Exception("Не задан параметр отделки: " + inputParam + " В помещении: " + curRoomNumber);
+                string floorAtRoom = GetParameterValue(floorParam);  // floorParam.AsValueString();
+                //if (floorAtRoom == null)
+                //{
+                //    floorAtRoom = floorParam.AsString();//в некоторых параметрах в наших проектах значение парметра может быть просто в string, вводим для надежности
+                //}
+
+                if (floorAtRoom == null)
+                {
+                    throw new Exception("Не задан параметр отделки: " + inputParam + " В помещении: " + curRoomNumber);
+                }
+
+
 
                 //floor.Add(floorParam.AsValueString()); - так бы мы добавляли в список полов значение параметра Отделки пола
                 //List<string> fd = floor.Distinct().ToList(); - так бы мы оставляли в этом списке только уникальные значения
@@ -111,6 +121,26 @@ namespace NSTeam
             TaskDialog.Show("Готово!", "Обработано: " + roomsList.Count + " помещений ");
             return Result.Succeeded;//для реализации Result Execute
         }
+
+        public string GetParameterValue(Parameter parameter)
+        {
+            switch (parameter.StorageType)
+            {
+                case StorageType.String:
+                    return parameter.AsString();
+                case StorageType.Double:
+                    return parameter.AsValueString();
+                case StorageType.ElementId:
+                    return parameter.AsElementId().IntegerValue.ToString();
+                case StorageType.Integer:
+                    return parameter.AsValueString();
+                //case StorageType.None:
+                // return parameter.AsValueString();
+                default:
+                    return "0";
+            }
+        }
+
 
     }
 }
