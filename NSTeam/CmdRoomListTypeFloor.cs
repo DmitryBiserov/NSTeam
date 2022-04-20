@@ -137,7 +137,7 @@ namespace NSTeam
                 //case StorageType.None:
                 // return parameter.AsValueString();
                 default:
-                    return "0";
+                    return "-";
             }
         }
 

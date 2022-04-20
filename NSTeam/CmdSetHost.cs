@@ -30,10 +30,17 @@ namespace NSTeam
             string setParamName = "NS_Стена-основа_Тип";
 
             //из модели отфильтровываем конкретные эелементы, здесь по категории (категорию элемента смотрим в Revit LookUp)
-            List<FamilyInstance> doorTypes = new FilteredElementCollector(doc)
+            List<FamilyInstance> openingsTypes = new FilteredElementCollector(doc)
             .WhereElementIsNotElementType()//если IsNot - то выбор экземпляров, если просто Is - то выбор типоразмеров
             .OfCategory(BuiltInCategory.OST_Doors)// Get Categories
             .Cast<FamilyInstance>().ToList();//что писать в угловых скобках смотрим для конкретного типа элемента в Revit LookUp
+
+            List<FamilyInstance> windowTypes = new FilteredElementCollector(doc)
+            .WhereElementIsNotElementType()//если IsNot - то выбор экземпляров, если просто Is - то выбор типоразмеров
+            .OfCategory(BuiltInCategory.OST_Windows)// Get Categories
+            .Cast<FamilyInstance>().ToList();//что писать в угловых скобках смотрим для конкретного типа элемента в Revit LookUp
+
+            openingsTypes.AddRange(windowTypes);
 
             //Упрощенный вариант записи фильтра, фактически тоже самое, что выше
             //FilteredElementCollector col = new FilteredElementCollector(doc);
@@ -43,16 +50,16 @@ namespace NSTeam
 
             //List<FamilyInstance> rebarTypes = col.Cast<FamilyInstance>().ToList();
 
-            string doorTypesNames = "";//заготовка текста для информационного окошка
+            string openingsTypesNames = "";//заготовка текста для информационного окошка
             int resultCount = 0;//счетчик числа обработанных семейств
-
+            
             //Для записи нам нужно открыть транзакцию
             using (Transaction t = new Transaction(doc))
             {
-                t.Start("Запись типа подосновы в двери");
+                t.Start("Запись типа подосновы в двери и окна");
 
                 //Перебираем двери в нашем списке
-                foreach (FamilyInstance curType in doorTypes)
+                foreach (FamilyInstance curType in openingsTypes)
                 {
                     //Мы сначала получили дверь как Element (и параметы унаследованные от Элемент), чтобы попасть к параметрам собственно двери, мы с помощью as меняем тип элемента на то, как он обозначен в Revit LookUp
                     //FamilyInstance door = curType as FamilyInstance;//обе эти строки кода мы в итоге заменили методом Cast и поправили foreach (FamilyInstance вместо Element)
@@ -69,7 +76,7 @@ namespace NSTeam
                     string setParamValue = setParam.AsString();//Чтение значения параметра. Тут нужно изменять, если у вас другой тип данных в записываемом параметре, в зависимости типа данных параметра
 
                     //текст для информационного окошка в конце программы
-                    doorTypesNames = doorTypesNames + "\n " + curType.Name + curType.Host.Name;
+                    openingsTypesNames = openingsTypesNames + "\n " + curType.Name + curType.Host.Name;
 
                     string containFilter = "Wall-Ret_300Con";
 
