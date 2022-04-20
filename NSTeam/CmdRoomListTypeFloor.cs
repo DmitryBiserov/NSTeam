@@ -101,7 +101,7 @@ namespace NSTeam
                 if (roomsFloorParam == null) throw new Exception("В проекте отсутствует параметр: " + outputParam);
 
                 //читаем параметр Отделки пола
-                string floorAtRoom = floorParam.AsValueString();
+                string floorAtRoom = GetParameterValue(floorParam);
 
                 if (roomFloor.ContainsKey(floorAtRoom))
                 {
