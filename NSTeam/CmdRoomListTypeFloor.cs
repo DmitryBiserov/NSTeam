@@ -44,6 +44,9 @@ namespace NSTeam
             .Cast<Room>()
             .ToList();
 
+            //берем список помещений и сортируем его по номерам помещений (по возрастанию), далее они в том же порядке будут обрабатываться и в на вывод будут попадать упорядоченным списком
+            roomsList = roomsList.OrderBy(item => item.Number).ToList();
+
             //вводим словарь, позднее (не тут) определим, что Ключ - тип пола, Значение - номера помещений
             Dictionary<string, string> roomFloor = new Dictionary<string, string>();
 
