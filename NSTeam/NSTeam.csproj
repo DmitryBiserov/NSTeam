@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="CmdPinRvtLinks.cs" />
+    <Compile Include="CmdToWorksets.cs" />
     <Compile Include="CmdWebClassPortal.cs" />
     <Compile Include="FormFloorSettings.cs">
       <SubType>Form</SubType>
