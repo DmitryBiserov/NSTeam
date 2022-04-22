@@ -108,5 +108,11 @@
       <DependentUpon>FormScreedSettings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ImagesLarge\BtnImg32ToWorkSet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ImagesSmall\BtnImg16ToWorkSet.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

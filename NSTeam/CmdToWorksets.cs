@@ -22,24 +22,28 @@ namespace NSTeam
             .Cast<RevitLinkInstance>()
             .ToList();
 
-            List<Workset> worksets
+            if (linksList.Count == 0) throw new Exception("В проекте отсутствуют подгруженные связи");
+
+            List <Workset> worksets
             = new FilteredWorksetCollector(doc)
             .Where(i => i.Name.Contains("01_Связанные RVT-файлы"))
             .ToList();
 
-            string workset = worksets.First().Name.ToString();
+            if (worksets.Count == 0) throw new Exception("В проекте отсутствуют рабочие наборы");
+
+            //Из отфильтрованного по имени списка рабочих наборов берем первый элемент. В этот рабочий набор мы будем помещать обнаруженные в модели связи
             Workset worksetp = worksets.First();
 
             foreach (RevitLinkInstance e in linksList)
             {
 
-                Parameter wsparam = e.get_Parameter(BuiltInParameter.ELEM_PARTITION_PARAM);
-                if (wsparam == null) return;
+                Parameter wsParam = e.get_Parameter(BuiltInParameter.ELEM_PARTITION_PARAM);
+                if (wsParam == null) throw new Exception("Не смог определить рабочий набор для связи");
 
                 using (Transaction tx = new Transaction(doc))
                 {
-                    tx.Start("Распределить по рабочим наборам");
-                    wsparam.Set(worksetp.Id.IntegerValue);
+                    tx.Start("Распределить элементы модели по рабочим наборам");
+                    wsParam.Set(worksetp.Id.IntegerValue);
                     tx.Commit();
                 }
             }

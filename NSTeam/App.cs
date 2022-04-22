@@ -47,6 +47,19 @@ namespace NSTeam
             pb1.Image = pb1ImageSmall;
             pb1.ToolTipImage = pb1ImageLarge;
 
+            PushButtonData bToWorkSetData = new PushButtonData(
+                "ToWorkset",
+                "Распределить" + System.Environment.NewLine + "  по рабочим наборам  ",
+                thisAssemblyPath,
+                "NSTeam.CmdToWorksets");
+
+            PushButton pbWorkSet = ribbonPanelBIM.AddItem(bToWorkSetData) as PushButton;
+            pbWorkSet.ToolTip = "Модель. \nРаспределить элементы модели по рабочим наборам. \nСвязи, Уровни и сетки осей";
+            BitmapImage pbWorkSetImageLarge = new BitmapImage(new Uri("pack://application:,,,/NSTeam;component/Resources/ImagesLarge/BtnImg32ToWorkSet.png"));
+            BitmapImage pbWorkSetImageSmall = new BitmapImage(new Uri("pack://application:,,,/NSTeam;component/Resources/ImagesSmall/BtnImg16ToWorkSet.png"));
+            pbWorkSet.LargeImage = pbWorkSetImageLarge;
+            pbWorkSet.Image = pbWorkSetImageSmall;
+
             PushButtonData b2Data = new PushButtonData(
             "RoomListTypeFloor",
             "Заполнить помещения" + System.Environment.NewLine + "  по типам пола  ",
