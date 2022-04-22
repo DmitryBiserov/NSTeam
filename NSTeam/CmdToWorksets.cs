@@ -33,10 +33,10 @@ namespace NSTeam
 
             //Из отфильтрованного по имени списка рабочих наборов берем первый элемент. В этот рабочий набор мы будем помещать обнаруженные в модели связи
             Workset worksetp = worksets.First();
+            int resultCount = 0;
 
             foreach (RevitLinkInstance e in linksList)
             {
-
                 Parameter wsParam = e.get_Parameter(BuiltInParameter.ELEM_PARTITION_PARAM);
                 if (wsParam == null) throw new Exception("Не смог определить рабочий набор для связи");
 
@@ -45,8 +45,10 @@ namespace NSTeam
                     tx.Start("Распределить элементы модели по рабочим наборам");
                     wsParam.Set(worksetp.Id.IntegerValue);
                     tx.Commit();
+                    resultCount++;
                 }
             }
+            TaskDialog.Show("Info", "Готово! Обработано " + resultCount + " RVT-связей");
             return Result.Succeeded;
         }
     }
