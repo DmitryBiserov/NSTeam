@@ -40,8 +40,6 @@ namespace NSTeam
             .Cast<RevitLinkInstance>()
             .ToList();
 
-            if (linksList.Count == 0) throw new Exception("В проекте отсутствуют подгруженные связи");
-
             List<Grid> gridsList = new FilteredElementCollector(doc).WhereElementIsNotElementType()
             .OfCategory(BuiltInCategory.OST_Grids)
             .Cast<Grid>()
@@ -64,7 +62,7 @@ namespace NSTeam
             .Where(i => i.Name.Contains("01_Связанные RVT-файлы"))
             .ToList();
 
-            if (worksets.Count == 0) throw new Exception("В проекте отсутствуют рабочие наборы");
+            if (worksets.Count == 0) throw new Exception("В проекте отсутствует рабочий набор 01_Связанные RVT-файлы");
 
             string workset = worksets.First().Name.ToString();
 
@@ -74,18 +72,20 @@ namespace NSTeam
             int resultCountGrids = 0;
             int resultCountLevels = 0;
 
-
-            foreach (RevitLinkInstance e in linksList)
+            if (linksList.Count == 0)
             {
-                Parameter wsParam = e.get_Parameter(BuiltInParameter.ELEM_PARTITION_PARAM);
-                if (wsParam == null) throw new Exception("Не смог определить рабочий набор для связи");
-
-                using (Transaction tx = new Transaction(doc))
+                foreach (RevitLinkInstance e in linksList)
                 {
-                    tx.Start("Распределить элементы модели по рабочим наборам");
-                    wsParam.Set(worksetp.Id.IntegerValue);
-                    tx.Commit();
-                    resultCountLinks++;
+                    Parameter wsParam = e.get_Parameter(BuiltInParameter.ELEM_PARTITION_PARAM);
+                    if (wsParam == null) throw new Exception("Не смог определить рабочий набор для связи");
+
+                    using (Transaction tx = new Transaction(doc))
+                    {
+                        tx.Start("Распределить связи по рабочим наборам");
+                        wsParam.Set(worksetp.Id.IntegerValue);
+                        tx.Commit();
+                        resultCountLinks++;
+                    }
                 }
             }
 
