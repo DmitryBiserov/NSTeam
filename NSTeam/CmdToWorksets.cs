@@ -72,7 +72,7 @@ namespace NSTeam
             int resultCountGrids = 0;
             int resultCountLevels = 0;
 
-            if (linksList.Count == 0)
+            if (linksList.Count != 0)
             {
                 foreach (RevitLinkInstance e in linksList)
                 {
