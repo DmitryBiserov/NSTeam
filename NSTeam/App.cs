@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI.Selection;
@@ -7,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using Autodesk.Revit.DB.Events;
+using Autodesk.Revit.UI.Events;
+
 
 namespace NSTeam
 {
@@ -16,6 +20,12 @@ namespace NSTeam
     public class App : IExternalApplication
     {
 
+        
+
+        //public void OnDocumentOpened(object sender, DocumentOpenedEventArgs e)
+        //{
+        //    //TaskDialog.Show("1","1"); Заготовка под фоновый обработчик
+        //}
 
         // define a method that will create our tab and button
         static void AddRibbonPanel(UIControlledApplication application)
@@ -150,7 +160,19 @@ namespace NSTeam
         public Result OnStartup(UIControlledApplication application)
         {
             AddRibbonPanel(application);
+            try
+            {
+                // Register events
+                application.ControlledApplication.DocumentOpened += new EventHandler<DocumentOpenedEventArgs>(OnDocumentOpened);
+
+            }
+            catch (Exception)
+            {
+                return Result.Failed;
+            }
             return Result.Succeeded;
+
+            
         }
     }
 }
