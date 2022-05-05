@@ -51,7 +51,7 @@ namespace NSTeam
                 "ToWorkset",
                 "Распределить" + System.Environment.NewLine + "  по рабочим наборам  ",
                 thisAssemblyPath,
-                "NSTeam.CmdToWorksets");
+                "NSTeam.CmdExcelExport");
 
             PushButton pbWorkSet = ribbonPanelBIM.AddItem(bToWorkSetData) as PushButton;
             pbWorkSet.ToolTip = "Модель. \nРаспределить элементы модели по рабочим наборам. \nСвязи, Уровни и сетки осей";
