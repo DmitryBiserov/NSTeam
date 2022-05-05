@@ -160,16 +160,16 @@ namespace NSTeam
         public Result OnStartup(UIControlledApplication application)
         {
             AddRibbonPanel(application);
-            try
-            {
-                // Register events
-                application.ControlledApplication.DocumentOpened += new EventHandler<DocumentOpenedEventArgs>(OnDocumentOpened);
+            //try
+            //{
+            //    // Register events
+            //   // application.ControlledApplication.DocumentOpened += new EventHandler<DocumentOpenedEventArgs>(OnDocumentOpened);
 
-            }
-            catch (Exception)
-            {
-                return Result.Failed;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    return Result.Failed;
+            //}
             return Result.Succeeded;
 
             
