@@ -20,7 +20,13 @@ namespace NSTeam
     public class App : IExternalApplication
     {
 
-        
+        public static void OnSyncCentralStart(object sender, DocumentSynchronizingWithCentralEventArgs e)
+        {
+            TaskDialog.Show("info", "1");
+            var instance = new CmdElementCreator();
+            
+            
+        }
 
         //public void OnDocumentOpened(object sender, DocumentOpenedEventArgs e)
         //{
@@ -160,6 +166,7 @@ namespace NSTeam
         public Result OnStartup(UIControlledApplication application)
         {
             AddRibbonPanel(application);
+            application.ControlledApplication.DocumentSynchronizingWithCentral += new EventHandler<DocumentSynchronizingWithCentralEventArgs>(OnSyncCentralStart);
             //try
             //{
             //    // Register events

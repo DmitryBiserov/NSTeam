@@ -53,6 +53,7 @@
     <Compile Include="App.cs" />
     <Compile Include="CmdElementCreator.cs" />
     <Compile Include="CmdPinRvtLinks.cs" />
+    <Compile Include="CmdStartUp.cs" />
     <Compile Include="CmdToWorksets.cs" />
     <Compile Include="CmdWebClassPortal.cs" />
     <Compile Include="FormFloorSettings.cs">

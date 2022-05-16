@@ -33,7 +33,7 @@ namespace NSTeam
         {
 
             //Получение документа
-            Document doc = commandData.Application.ActiveUIDocument.Document;
+            Document doc =  commandData.Application.ActiveUIDocument.Document;
 
             //Получение имени пользователя Windows, объявление переменных
             string username = Environment.UserName; //переменная для имени пользователя + получение имени пользователя Windows
@@ -129,5 +129,6 @@ namespace NSTeam
             }
             return elements;
         }
+  
     }
 }
