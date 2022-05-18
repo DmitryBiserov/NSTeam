@@ -10,22 +10,28 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Autodesk.Revit.DB.Events;
 using Autodesk.Revit.UI.Events;
+using Autodesk.Revit.ApplicationServices;
 
 
 namespace NSTeam
 {
-    //Этот текст тоже из С# Developer Revit-а
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
 
     public class App : IExternalApplication
     {
+        internal static Application thisApp = null;
 
-        public static void OnSyncCentralStart(object sender, DocumentSynchronizingWithCentralEventArgs e)
+        public void OnSyncCentralStart(object sender, DocumentSynchronizingWithCentralEventArgs e)
         {
+            //thisApp = this;
+            //Document doc = sender as Document;
             TaskDialog.Show("info", "1");
-            var instance = new CmdElementCreator();
-            
-            
+            //MtdHandler handler = new MtdHandler();
+            //MtdHandler.Execute();
+            CmdElementCreator ex = new CmdElementCreator();
+            //TaskDialog.Show("info", doc.Title);
+
+
         }
 
         //public void OnDocumentOpened(object sender, DocumentOpenedEventArgs e)
@@ -167,6 +173,10 @@ namespace NSTeam
         {
             AddRibbonPanel(application);
             application.ControlledApplication.DocumentSynchronizingWithCentral += new EventHandler<DocumentSynchronizingWithCentralEventArgs>(OnSyncCentralStart);
+
+            //thisApp = this;  // static access to this application instance
+
+            
             //try
             //{
             //    // Register events
