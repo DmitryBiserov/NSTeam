@@ -14,13 +14,11 @@ using Autodesk.Revit.UI.Events;
 
 namespace NSTeam
 {
-    //Этот текст тоже из С# Developer Revit-а
+    
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
 
     public class App : IExternalApplication
-    {
-
-        
+    {   
 
         //public void OnDocumentOpened(object sender, DocumentOpenedEventArgs e)
         //{
@@ -77,11 +75,24 @@ namespace NSTeam
             "NSTeam.CmdRoomListTypeFloor");
 
             PushButton pb2 = ribbonPanelAR.AddItem(b2Data) as PushButton;
-            pb2.ToolTip = "Полы. \nЗаполнить номера помещений (параметр: NS_Номера помещений_по типу пола) для экспликации полов (О_АР_Экспликация полов). \nРаздел Экспликация полов в стандарте АР";
+            pb2.ToolTip = "Полы. \nЗаполнить номера помещений (параметр: NS_Номера помещений_по типу пола) для экспликации полов (О_АР_Экспликация полов). \nРаздел в стандарте АР: Экспликация полов ";
             BitmapImage pb2ImageLarge = new BitmapImage(new Uri("pack://application:,,,/NSTeam;component/Resources/ImagesLarge/BtnImg32FlrTp.png"));
             BitmapImage pb2ImageSmall = new BitmapImage(new Uri("pack://application:,,,/NSTeam;component/Resources/ImagesSmall/BtnImg16FlrTp.png"));
             pb2.LargeImage = pb2ImageLarge;
             pb2.Image = pb2ImageSmall;
+
+            PushButtonData pbMarkFinishData = new PushButtonData(
+            "MarkFinish",
+            "Заполнить марки полов," + System.Environment.NewLine + "  стен и потолков  ",
+            thisAssemblyPath,
+            "NSTeam.CmdMarkFinish");
+
+            PushButton pbMarkFinish = ribbonPanelAR.AddItem(pbMarkFinishData) as PushButton;
+            pbMarkFinish.ToolTip = "Отделка. \nЗаполнить марки отделки полов, стен и потолков (параметры: NS_Отделка тип пола (потолка, стен) и Отделка пола (потолка, стен)). \nРаздел в стандарте АР: Экспликация полов. Порядок оформления ведомости отделки полов и марок на планах";
+            BitmapImage pbMFImageLarge = new BitmapImage(new Uri("pack://application:,,,/NSTeam;component/Resources/ImagesLarge/BtnImg32MrkFin.png")); 
+             BitmapImage pbMFImageSmall = new BitmapImage(new Uri("pack://application:,,,/NSTeam;component/Resources/ImagesSmall/BtnImg16MrkFin.png"));
+            pbMarkFinish.LargeImage = pbMFImageLarge;
+            pbMarkFinish.Image = pbMFImageSmall;
 
             PushButtonData b3Data = new PushButtonData(
             "RoomListScreedType",
@@ -90,7 +101,7 @@ namespace NSTeam
             "NSTeam.CmdRoomListScreedType");
 
             PushButton pb3 = ribbonPanelAR.AddItem(b3Data) as PushButton;
-            pb3.ToolTip = "Полы. \nЗаполнить номера помещений (параметр: NS_Номера помещений по типу стяжки) для экспликации стяжек (О_АР_Экспликация полов_Стяжка). \nРаздел Экспликация полов в стандарте АР";
+            pb3.ToolTip = "Полы. \nЗаполнить номера помещений (параметр: NS_Номера помещений по типу стяжки) для экспликации стяжек (О_АР_Экспликация полов_Стяжка). \nРаздел в стандарте АР: Экспликация полов ";
             BitmapImage pb3ImageLarge = new BitmapImage(new Uri("pack://application:,,,/NSTeam;component/Resources/ImagesLarge/BtnImg32ScrTp.png"));
             BitmapImage pb3ImageSmall = new BitmapImage(new Uri("pack://application:,,,/NSTeam;component/Resources/ImagesSmall/BtnImg16ScrTp.png"));
             pb3.LargeImage = pb3ImageLarge;
@@ -103,7 +114,7 @@ namespace NSTeam
             "NSTeam.CmdSetHost");
 
             PushButton pb4 = ribbonPanelAR.AddItem(b4Data) as PushButton;
-            pb4.ToolTip = "Перемычки. \nЗаполнить тип стены-подосновы у дверей и окон (параметр: NS_Стена-основа_Тип) для последующей обработки перемычек. \nРаздел Перемычки в стандарте АР";
+            pb4.ToolTip = "Перемычки. \nЗаполнить тип стены-подосновы у дверей и окон (параметр: NS_Стена-основа_Тип) для последующей обработки перемычек. \nРаздел в стандарте АР: Перемычки ";
             BitmapImage pb4ImageLarge = new BitmapImage(new Uri("pack://application:,,,/NSTeam;component/Resources/ImagesLarge/BtnImg32SetHost.png"));
             BitmapImage pb4ImageSmall = new BitmapImage(new Uri("pack://application:,,,/NSTeam;component/Resources/ImagesSmall/BtnImg16SetHost.png"));
             pb4.LargeImage = pb4ImageLarge;

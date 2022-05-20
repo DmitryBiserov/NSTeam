@@ -11,6 +11,7 @@ namespace NSTeam
 {
     //тоже вставляем строчку траназакции
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
+    [Autodesk.Revit.Attributes.Regeneration(Autodesk.Revit.Attributes.RegenerationOption.Manual)]
     class CmdPinRvtLinks : IExternalCommand
     {
         //добавили интерфейс, реагирующий на нажатие кнопки на Ленте
@@ -61,13 +62,15 @@ namespace NSTeam
                         pinStatusString = "Не закреплена";
                     }
 
-                    rvtLinks = rvtLinks + "\n" + curLink.Name + "\n - " + pinStatusString;//формируем строку для информационного окошка
+                    rvtLinks = rvtLinks + " " + curLink.Name + " - " + pinStatusString;//формируем строку для информационного окошка
 
                 }
                 t.Commit();//это относится к закрытию транзакции
             }
 
-            TaskDialog.Show("Отчет по приколотым связям", rvtLinks);//выводим информационное окошко
+            wpfReport reportMsg = new wpfReport(rvtLinks);
+            reportMsg.ShowDialog();
+            //TaskDialog.Show("Отчет по приколотым связям", rvtLinks);//выводим информационное окошко
             return Result.Succeeded;
         }
     }
