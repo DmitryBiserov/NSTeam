@@ -27,7 +27,7 @@ namespace NSTeam
         {
             InitializeComponent();
             reportMsg = s;
-            ListBoxReportMsg.ItemsSource = reportMsg;
+            TextBoxReportMsg.Text = reportMsg;
         }
     }
 }

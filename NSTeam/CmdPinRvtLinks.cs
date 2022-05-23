@@ -47,7 +47,10 @@ namespace NSTeam
                 {
 
                     RevitLinkInstance rLinks = curLink as RevitLinkInstance;// ВАЖНО. Переопеределение класса с помощью as, чтобы получить доступ к параметрам сущности как к RevitLinkInstance
-                    if (rLinks == null) continue;//такую конструкцию всегда нужно проверять на null, на случай если выше что-то пошло не так. 
+
+                    //Parameter curLinkName = curLink.get_Parameter(BuiltInParameter.RVT_LINK_FILE_NAME_WITHOUT_EXT);
+
+                    if (rLinks == null) continue;//такую конструкцию всегда нужно проверять на null, на случай если выше что-то пошло не так. 
                                                  //если обрабатываемое значение действительно null, то пропускаем эту итерацию (continue) и переходим к следующему элементу списка
 
                     rLinks.Pinned = true;//закрепляем связи. Pinned - параметр RVT-связи
@@ -62,7 +65,7 @@ namespace NSTeam
                         pinStatusString = "Не закреплена";
                     }
 
-                    rvtLinks = rvtLinks + " " + curLink.Name + " - " + pinStatusString;//формируем строку для информационного окошка
+                    rvtLinks = rvtLinks + " " + rLinks.Document.Title + " - " + pinStatusString + "\n";//формируем строку для информационного окошка
 
                 }
                 t.Commit();//это относится к закрытию транзакции

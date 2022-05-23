@@ -4,15 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NSTeam"
-             mc:Ignorable="d" d:DesignWidth="300" Height="445">
-    <Grid>
+             mc:Ignorable="d" d:DesignWidth="300" Height="432" Width="300" HorizontalAlignment="Left" MaxWidth="300" MaxHeight="500" ScrollViewer.CanContentScroll="True" Title="Отчёт по приколотым связям" Visibility="Visible" WindowStyle="ToolWindow" WindowStartupLocation="CenterOwner" SizeToContent="Width">
+    <Grid Margin="0,0,10,6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="ListBoxReportMsg"
-            Margin="10,23,10,22" Grid.Row="1" />
-        <Button x:Name="BtnReportOk" Grid.Row="0" HorizontalAlignment="Left" Width="100" Content="Ok" FontSize="20" FontFamily="Century Gothic" IsDefault="True" IsCancel="True"></Button>
+        <Button x:Name="BtnReportOk" Grid.Row="0" HorizontalAlignment="Left" Width="100" Content="Закрыть" FontFamily="Arial" IsDefault="True" IsCancel="True">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <TextBox x:Name="TextBoxReportMsg" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="270" Height="338" FontFamily="Arial" MaxLines="50" IsReadOnly="True" Margin="0,18,0,0">
+            <TextBox.Effect>
+                <DropShadowEffect/>
+            </TextBox.Effect>
+        </TextBox>
     </Grid>
 </Window>
