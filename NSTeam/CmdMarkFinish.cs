@@ -60,7 +60,9 @@ namespace NSTeam
 
 				t.Commit();
 			}
-			TaskDialog.Show("Готово!", "Обработано: " + roomsList.Count + " помещений ");
+			//TaskDialog.Show("Готово!", "Обработано: " + roomsList.Count + " помещений ");
+			wpfReport reportMsg = new wpfReport("Готово! Обработано: " + roomsList.Count + " помещений(ия) ");
+			reportMsg.ShowDialog();
 			return Result.Succeeded;
 		}
 		

@@ -50,8 +50,7 @@ namespace NSTeam
 
             //List<FamilyInstance> rebarTypes = col.Cast<FamilyInstance>().ToList();
 
-            string openingsTypesNames = "";//заготовка текста для информационного окошка
-            int resultCount = 0;//счетчик числа обработанных семейств
+            int resultCount = 0;//счетчик числа обработанных семейств
             
             //Для записи нам нужно открыть транзакцию
             using (Transaction t = new Transaction(doc))
@@ -72,15 +71,11 @@ namespace NSTeam
                     //а с сообщением об ошибке, текст ошибки будет выведен под кнопкой Подробнее. Можно было бы TaskDialog, но его не всегда можно использовать он менее универсален
                     if (setParam == null) throw new Exception("В записываемом элементе (ID: " + curType.Id + ") нет указанного параметра: " + setParamName);
 
-
                     string setParamValue = setParam.AsString();//Чтение значения параметра. Тут нужно изменять, если у вас другой тип данных в записываемом параметре, в зависимости типа данных параметра
 
                     //текст для информационного окошка в конце программы
-                    openingsTypesNames = openingsTypesNames + "\n " + curType.Name + curType.Host.Name;
-
-                    string containFilter = "Wall-Ret_300Con";
-
-                    if (curType.Host.Name != containFilter)
+                                                            
+                    if (curType.Host.Name != null)
                     {
                         //Запись параметра с помощью функции Set, из двери мы получили и записываем в нее следующие данные curType.Host.Name - ТекущаяДверь.Тип-Подосновы-(стены).Имя-подосновы
                         setParam.Set(curType.Host.Name);
@@ -97,7 +92,9 @@ namespace NSTeam
 
             }
             //информационное окошко в конце программы
-            TaskDialog.Show("Info", "Обработано " + resultCount + " экземпляра(ов) семейств");
+            //TaskDialog.Show("Info", "Обработано " + resultCount + " экземпляра(ов) семейств");
+            wpfReport reportMsg = new wpfReport("Готово! Обработано " + resultCount + " экземпляра(ов) семейств");
+            reportMsg.ShowDialog();
             return Result.Succeeded;//для реализации Result Execute
         }
 

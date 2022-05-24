@@ -65,8 +65,8 @@ namespace NSTeam
                         pinStatusString = "Не закреплена";
                     }
 
-                    rvtLinks = rvtLinks + " " + rLinks.Document.Title + " - " + pinStatusString + "\n";//формируем строку для информационного окошка
-
+                    rvtLinks = rvtLinks + " " + rLinks.Name + " - " + pinStatusString + "\n";//формируем строку для информационного окошка
+                    // GetLinkDocument().Title //да, получает имя файла, но не работает с Ревит-сервер
                 }
                 t.Commit();//это относится к закрытию транзакции
             }
@@ -76,5 +76,6 @@ namespace NSTeam
             //TaskDialog.Show("Отчет по приколотым связям", rvtLinks);//выводим информационное окошко
             return Result.Succeeded;
         }
+      
     }
 }

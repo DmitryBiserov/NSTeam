@@ -121,7 +121,9 @@ namespace NSTeam
 
             }
 
-            TaskDialog.Show("Info", "Готово! Обработано... "+ "\nRVT-связей: " + resultCountLinks + "\nОcей:" + resultCountGrids + "\nУровней: " + resultCountLevels);
+            //TaskDialog.Show("Info", "Готово! Обработано... "+ "\nRVT-связей: " + resultCountLinks + "\nОcей:" + resultCountGrids + "\nУровней: " + resultCountLevels);
+            wpfReport reportMsg = new wpfReport("Готово! Обработано... " + "\nRVT-связей: " + resultCountLinks + "\nОcей:" + resultCountGrids + "\nУровней: " + resultCountLevels);
+            reportMsg.ShowDialog();
             return Result.Succeeded;
         }
 
